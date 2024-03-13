@@ -1,0 +1,721 @@
+madhapur-New282828
+hightech-
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+23-11
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+mysql -u root -p
+
+create database sai;
+
+show databases;
+
+use sai;
+
+create tabel employee(id int,name varchar(30),position varchar(30),salary int,address varchar(30));
+
+insert into table values(1,'sai','manager',100000,'hyderabad'),(2,'vardhan','e-manager',100000,'banglore');
+
+create table courese (cid int primary key, cname varchar(20));
+
+create table student (sid int primary key, sname varchar(20), cid int ,foreign key(cid) references courese(cid));
+
+desc courese;
+
+desc student;
+
+system cls;
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+ALTER -- DDL 
+------------
+
+insert column:
+-------------
+
+syntax:alter table <table_name> add <col_name> datatype;
+
+alter table student add age int;
+
+
+drop column:
+-----------
+
+syntax: alter table <table_name> drop column <col_name>; 
+
+alter table student drop column age;
+
+
+ADDING seTRAINTS
+------------------
+
+syntax: alter table <table_name> modify <col_name> datatype not null;
+
+alter table student modify sname varchar(20) not null;
+
+
+Adding primary key to the table:
+--------------------------------
+
+syntax: alter table <table_name> add constraint primary key(<col_name>);
+
+create table student1(id int, name varchar(20),gpa int);
+
+alter table student1 add constraint primary key(id); 
+
+
+Adding unique key to the table:
+--------------------------------
+syntax: alter table <table_name> add constraint unique key(<col_name>);
+
+alter table student1 add constraint unique key(id); 
+
+
+drop the primary key:
+====================
+
+syntax: alter table <table_name> drop primary key;
+
+alter table student1 drop primary key;
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+assignment:
+===========
+add age coloum to emp
+add not nul to the name coloumn
+add pk to id
+add email column to email
+add unique constraint to email
+
+answers:
+========
+alter table emp add age int;
+
+alter table emp modify name varchar(20) not null;
+
+alter table emp add constraint primary key(id);
+
+alter table emp add email varchar(40);
+
+alter table emp add constraint unique(email);
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+tables emp and department
+
+emp1: id, name, did
+
+dep:did, name
+
+did is forgien key
+
+create table dep(did int primary key, name varchar(30));
+
+create table emp1(id int primary key, name varchar(30), did int , foreign key(did) references dep(did));
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+24-11
+---------------------------
+
+Drop and Truncate--DDL
+======================
+
+drop : 
+======
+
+1.it is used for to eliminate the table from the whole database
+
+2.when you drop the table constraints also removed in the drop command.
+
+3.the structure of the table does not exist
+
+4.the table is free from memory
+
+5.it is slow compared to truncate
+
+suntax: drop table <table_name>;
+
+drop table employee;
+
+Truncate: 
+=========
+
+1.it is used to eliminate the tuples or records from the table.
+
+2.intigrity constraints doesnt get removed in the truncate command.
+
+3.the structure of the table remains same
+
+4.the table is not free from memory.
+
+5.fast 
+
+syntax:
+=======
+truncate table <table_name>;
+
+truncate table employee;
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+select:DML
+==========
+select col1,col2 from <table_name> were <condition> group by <col1,col2> having <aggregate_condition> order by <arrange cols>(ASC/DES)
+
+Q. select name and age from table
+
+select name,age from stud;
+
+Q.how many students have age of 21.
+
+select * from stud where age=21;
+
+q. age 21 and gpa is greater than 8.
+
+select * from stud where age=21 and gpa>8;
+
+q.age>21 and gpa>9
+
+select * from stud where age>21 and gpa>9;
+
+q. age>20 or gpa>9
+
+select * from stud where age=21 or gpa>8;
+
+-----------------------------------------------------------------------------------------------------------------------
+
+1. write a quary whose gpa is greater than 9
+
+select * from stud where gpa>9;
+
+2. display the gpa greater than 9 and id less than 5
+
+select * from stud where gpa>9 and id<5;
+
+----------------------------------------------------------------------------------------------------------------------------
+
+Q. arrange the datails based on gpa  desc order
+
+select * from stud order by gpa desc;
+
+Q.display names first letter starts with 'R'.
+
+select * from stud where name like 'r%';
+
+Q.display names wnds with 'm'.
+
+select * from stud where name like '%m';
+
+Q.display if name contains a;
+
+select * from stud where name like '%a%';
+
+--------------------------------------------------------------------------------------------------------------------------
+
+practice:
+=========
+
+1.display the detais contain letter i and age >22.
+
+select * from stud where name like '%i%' and age>22;
+
+----------------------------------------------------------------------------------------------------------------------------
+
+select * from stud where name = 'sai';
+
+select * from stud where name like 'sa%';
+
+Q.dispaly details from id 2 and 5.
+
+select * from stud where id between 2 and 5;
+
+Q.display details from 1,5.
+
+select * from stud where id  in(2,5);
+
+---------------------------------------------------------------------------------------------------------------------------------
+practice:
+==========
+
+1.how to get the results for  id 3,6,1 and arrange gpa in ascending?
+
+select * from stud where id in(3,6,1) order by gpa;
+
+2. how to get the details of the students whose gpa is in between 8 and 9 and age between 20 and 21.
+
+select * from stud where gpa between 8 and 9 and age between 20 and 21; 
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+q. dispaly detais of students whose name second letter is a.
+
+select * from stud where name like '_a%';
+
+q. dispaly detais of students whose name third letter is i.
+
+select * from stud where name like '__i%';
+
+---------------------------------------------------------------------------------------------------------------------------------
+25-11
+---------------------------------------------------------------------------------------------------------------------------------
+
+update-dml
+==========
+
+syntax- update <table_name> set <requirement> where <condition>;
+
+update stud set name ='rajesh' where id=5;
+
+delete-dml
+==========
+
+syntax-delete from stud where id='6';
+
+delete from <table name> whrer <condition>
+
+drop-ddl 
+========
+
+drop table <table_name>;
+
+limit:
+======
+
+it is used to specify the number of records to return limit claus is useful on large data of tables.
+
+select coloums from <table_name> where <comdition> limit <requires_data_rows>
+
+select * from stud limit 1;
+
+select * from stud limit 2;
+
+q. how to get the last two data from table using limit
+
+select * from stud order by id desc limit 2;
+
+q.how to get the fourth record data from table using limit
+
+select * from stud limit 3,1;
+
+q.get second highest salary from table using limit
+
+
+
+q.get second lowest salary from table using limit
+
+select salary from emp order by salary limit 1,1;
+
+-------------------------------------------------------------------------------------------1-12
+-------------------------------------------------------------------------------------------
+string function:
+================
+
+position:
+========
+
+syntax:(substring IN string)
+
+select position('@' in 'abcd@gmail.com');
+
+repeat:
+=======
+repeat(string ,3)
+
+select repeat(sai,4);
+
+Q.not start with vowel
+
+select * from <table_name> where left(name,1) not in ('A','E','I','O','U');
+
+Q.ends with vowel
+
+select * from <table_name> where right(name,1) in ('A','E','I','O','U');
+
+
+Replace:
+=======
+this function reolaces all the occurences of substring within a sring.
+
+Syntax: Replace(string, sub_string, new_string)
+
+select replace('saivardhan_i','i','j');
+
+how many e's are in entrepreneur?
+
+select length('entrepreneur') - length(replace('entrepreneur','e',''));
+
+select length("D:\files\test\archive\new folder\") -length(replace("D:\files\test\archive\new folder\",'\',''));
+
+substring:
+=========
+
+syntax: substing('sting',start_positon,end_position)
+
+select substring("mysql tutorial",1,5);
+
+select firstname, substring('firstname',1,1) from table_name;
+
+Q. how to get last part of the name?
+
+select name,substring(name,locate(' ',name)+1,length(name)-locate(' ',name)) as lastname from stud;
+
+substing_index:
+===============
+
+it returs a substring of a string before a specified number of delimiree occures.
+
+Syntax: (String, delimeter, number);
+
+select substring_index('www.google.com','.',1);
+
+select substring_index('abc@gmail.com','@',1);
+
+select substring_index('abc@gmail.com','@',-1);
+
+----------------------------------------------------------------------------------------------------
+4-11
+----------------------------------------------------------------------------------------------------
+Date functions:
+===============
+
+getdate-mysql server
+
+curdate()
+
+select curdate();
+
+now()
+
+select now();
+
+adddate()- this function assa tow given dates
+
+syntax: adddate(date, interval unitofinterval)
+
+select adddate('2023-12-04', interval 1 day)
+
+select adddate(curdate(), interval 1 day);
+
+select adddate(now(), interval 1 month);
+
+monthname()
+
+select monthname(curdate());
+
+select dob,monthname(dob) from emp3;
+
+dayofyear()
+
+select dayofyear(curdate());
+
+yearweek()
+
+select yearweek(curdate());
+
+dayofmonth()
+
+dayname()
+
+select dayname('2024-02-01');
+
+last_day()
+
+select last_day(curdate());
+
+select adddate(curdate(),interval 1 month);
+
+select last_day(adddate(last_day(adddate(curdate(),interval 1 month)),interval 1 day));
+
+select adddate(last_day(adddate(curdate(),interval 1 month)),interval 1 day) as date_od_month,dayname(adddate(last_day(adddate(curdate(),interval 1 month)),interval 1 day)) as day_of_month;
+
+datediff() it returns between two dates
+
+select hiredate,dateiff(day,hiredate,curdate()) from emp3;
+
+timestampdiff():(interval,date1,date2)
+
+select timestampdiff(year,'1947-02-15',curdate());
+
+Q.select employee in may month
+
+select * from emp4 where monthname(hiredate)='may';
+
+Q.select employee in 2020 year
+
+select * from emp4 where year(hiredate)=2020;
+
+----------------------------------------------------------
+10-12
+---------------------------------------------------------
+
+concat:
+-------
+
+select name,salary,concat(name,' ',salary) as sem from emp4;
+
+ifnull and coalesce
+--------------------
+syntax:
+======
+if null deals with one alternate value
+ifnull(expression,alt_value)
+
+select name,salary,concat(ifnull(name,' '),ifnull(salary,' ')) as sem from emp4;
+
+coalesce deals with multiple values:
+
+coalesce(val1,val2,val3)
+
+select name,salary,concat(coalesce(name,' '),coalesce(salary,' ')) as sem from emp4;
+
+Q.if middlename is null then print no:
+
+select *,ifnull(middlename,"no") as null_or_not from emp5;
+
+sum(units_sold+units_in_order)*unitprice=total_price
+
+Q.totalprice
+
+select name,unitssold,unitsinorder,unitprice, (unitssold+coalesce(unitsinorder,0))*unitprice as totalprice from product;
+
+Q.Gross salary
+
+select name,salary,bonus,(salary+coalesce(bonus,0)) as gross from emp6;
+
+sub-queries:
+============
+
+1)it is a type of query that is embeded or nested into dml statement.
+
+2)it is a quer inside a query
+
+3)a subquery usually adde within the where class of another sql selct satement
+ 
+syntax:
+
+select list(col) from table_name where expression (select col_name from table);
+
+4)At the rime of execution, first inner-query executed and result passed to the outer query
+
+select * from emp where addressid in(select id from address where adress_name ='hyd')
+
+select e.name,sal,a.name from emp e inner join address a on e.addressid=a.id where a.name='hyd';
+
+types of subqueries:
+-------------------
+
+1)co-related:
+
+these sub-queries will not work independently. it expects values from outer query.
+
+2)non-corelated
+
+thtese queries will work independently.these relay on outer query values.
+
+---------------------------------------------------------------------------
+12-11
+---------------------------------------------------------------------------
+sub-queries
+
+Q1.find the salaries of employees whos salasry is more than the avg salary of all teh employees.
+
+select * from emp2 where salary > (select avg(salary) from emp2);
+
+select * from emp2 e join (select avg(salary) as avg_salary from emp2) a on e.salary > a.avg_salary;
+
+Q.find the salaries of the employees whos salary is more than the max salary in IT department.
+
+select * from emp where salary > (select max(salary) from emp where dept_name='IT');
+
+Q.find the employees who earn highest salries in each department.
+
+select * from emp where (dept_name,salry) in (select dept_name,max(salary) from emp group dept_name);
+
+Q.find the department names  who dont have any employees.
+
+select name from dept where name not in(select dept_name where from emp);
+
+Q.find the employee in each department who earned more than the average salary in the department.
+
+selct * from emp e1 where salary>(selecr avg(salary) from emp e2 where e2.dept_name=e1..dept_name);
+
+Q.write a case satement and made comments on the employee performance
+	if the employee got more than the avg salary 'High performance'
+	if the employee got less than the avg salary 'Average performance'
+select * , (case whwen salary>(select avg(salary) From emp) then 'high performance' else 'Average performance' end) as performance_comments from emp;
+
+--------------------------------------------------------------------------
+15-12
+--------------------------------------------------------------------------
+set-operators:
+
+Rdbms employset operators to modify and compare teh data sets 
+
+A set operator creates new set of data that satisfies particular requirements by combining or comparing twho or more data sets.
+
+mysql has four types of set operators
+
+union all : combine two sets into one will not remove duplicates;
+
+syntax: select col1,col2 from table1 union all select col1,col2 from table2;
+
+select * from empuk union all select * from empusa;
+
+union : combine two sets into one will remove duplicates;
+
+syntax: select col1,col2 from table1 union select col1,col2 from table2;
+
+select * from empuk union  select * from empusa;
+
+
+intersect : common records between toe tables
+
+syntax: select col1,col2 from table1 intersect select col1,col2 from table2;
+
+select * from empuk intersect select * from empusa;
+
+except : records from the first table that are not present in second table;
+
+requirements:
+
+1.same number of columns 
+2.same data types
+3.must be in same order
+4.orderby clause not worked in the first statement
+
+Q.only it employes from tables
+
+select * from empuk  where department='it' union all select * from empusa where department='it';
+
+q. first table males and second table female
+
+select * from empuk  where gender='male' union select * from empusa where gender='female';
+
+Join clause combines two given relations and as a result.
+ 
+Union clause when we want to combine theresults obtained from the two queries
+
+
+View 
+
+A view is a virtual table based on the result set of an sql satement 
+it contains rows and columns similar like a real table the fields in a view are fields from one or more real tables
+
+two types of views:
+
+simple view:
+
+creatd based on one table
+
+we can make changes like update delete insert inthe view that can reflect on hte main table as well
+
+complex view
+
+created based on multiple tabeles.
+
+cannot update iin complex view
+
+
+create view vm_empuk as select * from empuk;
+
+-----------------------------------------------------------------------------
+18-12
+-----------------------------------------------------------------------------
+CTE:
+
+
+with cte_it as(
+select * from empuk where department='IT')
+select * from cte_it;
+
+with avg_sal (average_sal) as(
+select avg(salary) from emp4)
+select * from avg_sal;
+
+with cte_it as(
+select * from empuk where department='IT'),
+cte_hr as(
+select * from empusa where department='HR')
+select * from cte_it union all select * from cte_hr;
+
+with avg_sal (average_sal) as(
+select avg(salary) from emp4)
+select * from emp4 e, avg_sal av where e.salary>av.average_sal;
+
+-----------------------------------------------------------------------
+19-12
+-----------------------------------------------------------------------
+alter emp add <coloumn name> after <column name>;
+
+Temp Table:
+===========
+it allows a very useful and flexible feature to achive complex tasks quickly
+
+temp table is visible and acceseble only for the current session.
+
+mysql deleted this table automatically as long as teh current session is closed .
+
+syntac: create temporary table <table_name>(col1,col2)
+
+create temporary table temp (id int, name varchar(30));
+
+create temporary table temp_emp select * from emp;
+
+create temporary table temp_emp1 select * from emp limit 0;
+
+create temporary table temp_emp2 select * from emp limit 3;
+
+-----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
